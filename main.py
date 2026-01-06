@@ -1,58 +1,79 @@
 # Gestionnaire de Dépenses Simple
-
+#lien Git: https://github.com/moussacode/GestionnaireDeDepense.git
 depenses = []
 
-while True:
+def affiche_menu() :
     print("MENU")
     print("1. Ajouter une depense")
     print("2. Afficher les depenses")
     print("3. Total des depenses")
     print("4. Depenses par categorie")
     print("5. Quitter")
-    
-    choix = input("Choix : ")
-    
-    if choix == "1":
-        montant = float(input("Montant : "))
-        categorie = input("Categorie : ")
-        description = input("Description : ")
+
+
+def ajouter_depense ():
+    montant = float(input("Montant : "))
+    categorie = input("Categorie : ")
+    description = input("Description : ")
         
-        depense = {
+    depense = {
             "montant": montant,
             "categorie": categorie,
             "description": description
         }
-        depenses.append(depense)
-        print("Votre depeencse est ajouter")
+    depenses.append(depense)
+    print("Votre depeencse est ajouter")
+
+def toute_depense ():
+    print("tous les depence ")
+    for i in range(len(depenses)):
+        d = depenses[i]
+        print(f"{i+1}. {d['montant']} FCFA - {d['categorie']} - {d['description']}")
+
+def total_depence():
+    total = 0
+    for depense in depenses:
+        total += depense["montant"]
+    print(f"Total : {total} FCFA")
+
+def par_categorie():
+    print("=== PAR CATÉGORIE ===")
+    categories = {}
+        
+    for depense in depenses:
+            cat = depense["categorie"]
+            if cat not in categories:
+                categories[cat] = []
+            categories[cat].append(depense)
+        
+    for cat in categories:
+            print(f"{cat}:")
+            for d in categories[cat]:
+                print(f"  - {d['montant']} FCFA: {d['description']}")
     
+
+while True:
+
+    affiche_menu()
+    
+    
+    choix = input("Choix : ")
+    
+    if choix == "1":
+        
+        ajouter_depense ()
    
     elif choix == "2":
 
-        print("tous les depence ")
-        for i in range(len(depenses)):
-            d = depenses[i]
-            print(f"{i+1}. {d['montant']} FCFA - {d['categorie']} - {d['description']}")
+        toute_depense ()
     
-   
     elif choix == "3":
-        total = 0
-        for depense in depenses:
-            total += depense["montant"]
-        print(f"Total : {total} FCFA")
-    
+        
+        total_depence()
     
     elif choix == "4":
-      print("Affichage par categorie ")
-      
-      categorie = {}
-
-      for depense in depenses :  
-          total_cat = depense['categorie']
-          if total_cat  in categorie:
-              categorie[total_cat ] =  depense['montant'] + categorie[total_cat ]                 
-          else :
-              categorie[total_cat ] =  depense['montant']
-      print (categorie)
+    
+        par_categorie()
       
     
 
