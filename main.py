@@ -42,31 +42,18 @@ while True:
     
     
     elif choix == "4":
-        print("categorie")
-        categories = {}
-        categorie_tab=[]
-        for depense in depenses:
-            categorie_item = depense["categorie"]
-            
-            if categorie_item not in categorie_tab:
-                categorie_tab.append(categorie_item)
-        print(categorie_tab)
+      print("Affichage par categorie ")
+      
+      categorie = {}
 
-        for depense in depenses:
-
-            for i in categorie_tab: 
-                if i == depense["categorie"] :
-                    td += depense["montant"]
-            
-            for d in categories[depense["categorie"]]:
-                print(f"{d['montant']} FCFA: {d['description']}")
-    
-
-
-
-        
-        
-        
+      for depense in depenses :  
+          total_cat = depense['categorie']
+          if total_cat  in categorie:
+              categorie[total_cat ] =  depense['montant'] + categorie[total_cat ]                 
+          else :
+              categorie[total_cat ] =  depense['montant']
+      print (categorie)
+      
     
 
     elif choix == "5":
